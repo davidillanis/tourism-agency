@@ -299,7 +299,4 @@ export class AppComponent implements OnInit {
     }
   }
 
-  protected boton(){
-    this.modalSevice.getModalServiceTourism.viewModal("S001");
-  }
 }

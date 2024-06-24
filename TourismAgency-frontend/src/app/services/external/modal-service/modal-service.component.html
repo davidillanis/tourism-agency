@@ -1,0 +1,138 @@
+<!-- MODAL  -->
+
+<!-- _____________________________ Modal info ServiceTourismEntity _____________________________ -->
+<div class="modal fade" id="viewModalServicioInfo" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">{{getModalServiceTourism.getEntity.nameService}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card border border-0">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{getModalServiceTourism.getEntity.urlImage}}" class="img-fluid rounded-start" alt="...">
+              <!--{{s.urlImage}}-->
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <p class="card-text">{{getModalServiceTourism.getEntity.description}}</p>
+                <h6 class="card-title text-success">${{getModalServiceTourism.getEntity.costService}}</h6>
+                <p class="card-text"><small class="text-body-secondary">Last update
+                    {{getModalServiceTourism.getEntity.dateService[2]}}/{{getModalServiceTourism.getEntity.dateService[1]}}/{{getModalServiceTourism.getEntity.dateService[0]}}
+                    ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+          (click)="getModalServiceTourism.addSaleServiceTourism(getModalServiceTourism.getEntity.codeService)">shopping
+          cart</button><!-- (click)="addSaleServiceTourism(s.codeService)"-->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ___________________________________________________________________________________________ -->
+
+
+
+<!-- _____________________________ Login _____________________________ -->
+<div class="text-center">
+  <div class="modal fade" id="log-in-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content bg-primary">
+        <div class="modal-header">
+          <h1 class="modal-title fs-3 text-light" id="exampleModalLabel">Log In</h1>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="getModalLogin.loginForm" (ngSubmit)="getModalLogin.formLoginSubmit()">
+            <div class="mb-3">
+              <input type="text" class="form-control" id="log-in-username" placeholder="Username"
+                formControlName="username">
+              <span class="text-danger"
+                *ngIf="getModalLogin.loginForm.get('username') && getModalLogin.loginForm.get('username')?.invalid && getModalLogin.loginForm.get('username')?.touched">the
+                username must not be blank</span>
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" id="log-in-password" placeholder="Password"
+                formControlName="password">
+              <span class="text-danger"
+                *ngIf="getModalLogin.loginForm.get('password') && getModalLogin.loginForm.get('password')?.invalid && getModalLogin.loginForm.get('password')?.touched">the
+                password must not be blank</span>
+            </div>
+            <div class="text-center">
+              <input type="submit" class="btn btn-success" value="Login" [disabled]="getModalLogin.loginForm.invalid">
+            </div>
+          </form>
+          <br>
+          <a href="#" class="link-info  " aria-current="page" data-bs-toggle="modal" data-bs-target="#register-user"
+            data-bs-whatever="@mdo">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <div class="modal fade" id="register-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content bg-primary">
+        <div class="modal-header">
+          <h1 class="modal-title fs-3 text-light" id="exampleModalLabel">Register</h1>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="getModalLogin.registerForm" (ngSubmit)="getModalLogin.register()">
+            <div class="mb-3">
+              <input type="text" class="form-control" id="register-username" placeholder="Username"
+                formControlName="username">
+              <span class="text-danger"
+                *ngIf="getModalLogin.registerForm.get('username') && getModalLogin.registerForm.get('username')?.invalid && getModalLogin.registerForm.get('username')?.touched">this
+                username exists or is blank</span>
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" id="register-password" placeholder="Password"
+                formControlName="password">
+              <span class="text-danger"
+                *ngIf="getModalLogin.registerForm.get('password') && getModalLogin.registerForm.get('password')?.invalid && getModalLogin.registerForm.get('password')?.touched">this
+                password does not blank</span>
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" id="register-confirm-password" placeholder="Confirm Password"
+                formControlName="confirmPassword">
+              <span class="text-danger"
+                *ngIf="getModalLogin.registerForm.get('confirmPassword') && getModalLogin.registerForm.get('confirmPassword')?.invalid && getModalLogin.registerForm.get('confirmPassword')?.touched">the
+                password is invalid</span>
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control" id="register-email" placeholder="Email" formControlName="email">
+              <span class="text-danger"
+                *ngIf="getModalLogin.registerForm.get('email') && getModalLogin.registerForm.get('email')?.invalid && getModalLogin.registerForm.get('email')?.touched">the
+                email is invalid</span>
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control" id="register-firsh-name" placeholder="First Name"
+                formControlName="firstName">
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control" id="register-last-name" placeholder="Last Name"
+                formControlName="lastName">
+            </div>
+            <div class="text-center">
+              <input type="submit" class="btn btn-success" value="Register"
+                [disabled]="getModalLogin.registerForm.invalid">
+            </div>
+          </form>
+          <a href="#" class="link-info  " aria-current="page" data-bs-toggle="modal" data-bs-target="#log-in-user"
+            data-bs-whatever="@mdo">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- _________________________________________________________________ -->

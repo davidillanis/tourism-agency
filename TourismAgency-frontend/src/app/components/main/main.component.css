@@ -1,0 +1,8 @@
+.container {
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    height: 660px;
+    width: 100%;
+    transition: background-image 1s ease-in-out;
+}

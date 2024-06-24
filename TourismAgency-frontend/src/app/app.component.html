@@ -1,0 +1,379 @@
+<!-- Navbar -->
+<div style="position: fixed; width: 100%; z-index: 1;">
+
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid bg-primary-subtle" style="margin: -8px;">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row">
+        <li class="nav-item">
+          <select class="nav-link">
+            <option class="text-success" *ngFor="let i of getIdioms()">{{i.name}}</option>
+          </select>
+        </li>&nbsp;&nbsp;
+        <li class="nav-item">
+          <button class="nav-link active" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M17 17h-11v-14h-2" />
+              <path d="M6 5l14 1l-1 7h-13" />
+            </svg>
+          </button>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav d-flex flex-row">
+        <li class="nav-item">
+          <button *ngIf="!(isLoggedIn$ | async)" class="nav-link active" aria-current="page" data-bs-toggle="modal"
+            data-bs-target="#log-in-user" data-bs-whatever="@mdo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-login">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M15 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+              <path d="M21 12h-13l3 -3" />
+              <path d="M11 15l-3 -3" />
+            </svg>
+            Login
+          </button>
+        </li>
+      </ul>
+      <div *ngIf="(isLoggedIn$ | async)" class="btn-group dropstart">
+        <button class="nav-link active" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+          </svg>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title text-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-user-square-rounded">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 13a3 3 0 1 0 0 -6a3 3 0 0 0 0 6z" />
+                    <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                    <path d="M6 20.05v-.05a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v.05" />
+                  </svg>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">{{username}}</h6>
+                </h5>
+                <button class="card-link">Configuration</button>
+              </div>
+            </div>
+          </li>
+          <li *ngIf="(isCustomer | async)">
+            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#shopping-customer"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-bag">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z" />
+                <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
+              </svg> Shopping</button>
+          </li>
+          <li><button class="dropdown-item" (click)="logOut()"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                <path d="M9 12h12l-3 -3" />
+                <path d="M18 15l3 -3" />
+              </svg> Log-out</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="btn btn-primary" aria-current="page" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="/service">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="/package">Packages</a>
+          </li>
+          <li class="nav-item" *ngIf="(isEmployee | async)">
+            <a class="btn btn-primary" href="/employee">Employee</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+            style="background-color: rgb(60, 60, 70);">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+<!-- ___________________________ car store ___________________________ -->
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Shopping Cart</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- ___________________________ Navbar of car store ___________________________ -->
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-service-tab" data-bs-toggle="tab" data-bs-target="#nav-service"
+              type="button" role="tab" aria-controls="nav-service" aria-selected="true">Services</button>
+            <button class="nav-link" id="nav-package-tab" data-bs-toggle="tab" data-bs-target="#nav-package"
+              type="button" role="tab" aria-controls="nav-package" aria-selected="false">Packages</button>
+            <button class="nav-link" id="nav-total-tab" data-bs-toggle="tab" data-bs-target="#nav-total-count"
+              type="button" role="tab" aria-controls="nav-total-count" aria-selected="false">Total count</button>
+
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <!--SERVICE-->
+          <div class="tab-pane fade show active" id="nav-service" role="tabpanel" aria-labelledby="nav-service-tab"
+            tabindex="0">
+            <table class="table">
+              <thead class="table-dark" style="position: sticky; top: -16px;">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Cost</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let service of getSaleServiceEntityList let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{service.nameService}}</td>
+                  <td class="text-success">${{service.costService}}</td>
+                  <td>
+                    <button class="nav-link" (click)="removeSaleServiceTourism(service.codeService)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ff0000"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-trash-x">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16zm-9.489 5.14a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z" />
+                        <path
+                          d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--PACKAGE-->
+          <div class="tab-pane fade" id="nav-package" role="tabpanel" aria-labelledby="nav-package-tab" tabindex="0">
+            <table class="table">
+              <thead class="table-dark" style="position: sticky; top: -16px;">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Cost</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let service of salePackageEntityList let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{service.namePackage}}</td>
+                  <td class="text-success">${{service.cost}}</td>
+                  <td>
+                    <button class="nav-link" (click)="removeSalePackageTourism(service.codePackage)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ff0000"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-trash-x">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16zm-9.489 5.14a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z" />
+                        <path
+                          d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--TOTAL COUNT-->
+          <div class="tab-pane fade" id="nav-total-count" role="tabpanel" aria-labelledby="nav-total-count-tab"
+            tabindex="0">
+            <table class="table">
+              <thead class="table-dark" style="position: sticky; top: -16px;">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">All Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Services</td>
+                  <td class="text-success">${{getCostServiceTourism()}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Packages</td>
+                  <td class="text-success">${{getCostPackageTourism()}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Cost Final</td>
+                  <td class="text-success">${{getCostServiceTourism()+getCostPackageTourism()}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <!-- ___________________________________________________________________________ -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="buyPackageServiceTouris()">Buy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- _________________________________________________________________ -->
+
+<!-- ___________________________ Shopping ____________________________ -->
+<!-- Modal -->
+<div class="modal fade" id="shopping-customer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">My Shopping</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- _______________________ Info shopping _______________________ -->
+        <div class="d-flex align-items-start">
+          <div class="default-container">
+            <div class="list-group">
+              <button class="list-group-item list-group-item-action" data-bs-toggle="pill"
+                data-bs-target="#target-sale-view" *ngFor="let sale of saleEntityList; let i=index"
+                (click)="loadDataInSaleShopping(sale.numberSale)">
+                <div class="d-flex w-100 justify-content-between">
+                  <small class="text-body-secondary">sale date
+                    {{sale.dateSale[0]}}-{{sale.dateSale[1]}}-{{sale.dateSale[2]}}</small>
+                </div>
+                <h6 class="mb-1">Sale {{i+1}}</h6>
+                <small class="text-success focus-ring-color-red">paid {{sale.paymentMethod}}</small>
+              </button>
+            </div>
+          </div>
+
+          <div class="" style="width: 100%;">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade" id="target-sale-view" role="tabpanel" aria-labelledby="v-pills-profile-tab"
+                tabindex="0">
+                <br>
+                <div class="card text-bg-info text-center">
+                  <div class="card-header">
+                    <h5 class="text-primary">Code Sale: '{{saleEntity.numberSale}}'</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Services
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show"
+                          data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+
+                            <div class="contenedor-pequeno">
+                              <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                <label class="btn btn-success btn-sm" style="min-width: 120px;"
+                                  *ngFor="let codeService of saleEntity.codeServices">{{codeService}}</label>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Packages
+                          </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+
+                            <div class="contenedor-pequeno">
+                              <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                <label class="btn btn-success btn-sm" style="min-width: 120px;"
+                                  *ngFor="let codePackage of saleEntity.codePackages">{{codePackage}}</label>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <p class="card-text text-success-emphasis">Pay Method: {{saleEntity.paymentMethod}}</p>
+                  </div>
+                  <div class="card-footer text-body-secondary">date of purchase  {{saleEntity.dateSale[0]}}-{{saleEntity.dateSale[1]}}-{{saleEntity.dateSale[2]}}</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- _____________________________________________________________ -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- _________________________________________________________________ -->
+<br><br><br><br><br>
+
+
+<button (click)="boton()">click</button>
+<!--<button (click)="alertError()">test</button>-->
+<app-modal-service></app-modal-service>
+<router-outlet></router-outlet>
+
+
+
+<!--
+<app-main></app-main>
+<app-sale-service></app-sale-service>
+<app-sale-package></app-sale-package>
+-->

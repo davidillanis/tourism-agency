@@ -1,0 +1,338 @@
+<div class="container">
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+
+    <!--SERVICE-->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          Service Tourism
+        </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body default-container">
+
+          <button type="button" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal"
+            data-bs-target="#modalServiceTourism" (click)="newServiceTourism()">Add new Service</button>
+          <table class="table">
+            <thead class="table-dark" style="position: sticky; top: -16px;">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Available</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let service of serviceTourismEntityList| async; let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{service.nameService}}</td>
+                <td class="text-success">{{service.costService}}</td>
+                <td class="text-info">{{service.available}}</td>
+                <td>
+                  <button class="nav-link d-inline p-2" data-bs-toggle="modal" data-bs-target="#modalServiceTourism"
+                    (click)="updateServiceTourism(service.codeService)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="#3567ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                      <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                      <path d="M16 5l3 3" />
+                    </svg>
+                  </button>
+                  <button class="nav-link d-inline p-2" (click)="clickButtonInfoServiceTourism(service.codeService)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="#dba100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-info-square-rounded">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 9h.01" />
+                      <path d="M11 12h1v4h1" />
+                      <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <!--PACKAGE-->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+          package Tourism
+        </button>
+      </h2>
+      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body default-container">
+
+          <button type="button" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal"
+            data-bs-target="#modalpackageTourism" (click)="newPackageTourism()">Add new Package</button>
+          <table class="table">
+            <thead class="table-dark" style="position: sticky; top: -16px;">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Available</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Services</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let package of packageTourismEntityList| async; let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{package.namePackage}}</td>
+                <td>{{package.available}}</td>
+                <td class="text-success">{{package.cost}}</td>
+                <td class="text-info">
+                  <div class="very-small-container">
+                    <ul class="list-group list-group-flush" *ngFor="let service of package.services">
+                      <button class="btn btn-sm" (click)="clickButtonInfoServiceTourism(service)">{{service}}</button>
+                    </ul>
+                  </div>
+                </td>
+                <td>
+                  <button class="nav-link d-inline p-2" data-bs-toggle="modal" data-bs-target="#modalpackageTourism"
+                    (click)="updatePackageTourism(package.codePackage)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="#3567ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                      <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                      <path d="M16 5l3 3" />
+                    </svg>
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal SERVICE -->
+<div class="modal fade" id="modalServiceTourism" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{titleModal}} Service, to day is {{localDate}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex justify-content-center align-items-center">
+        <!--Center:d-flex justify-content-center align-items-center-->
+        <form [formGroup]="serviceTourismForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="service-name" formControlName="name">
+                <label for="service-name">Servie Name</label>
+
+                <div class="alert alert-danger" role="alert"
+                  *ngIf="serviceTourismForm.get('name') && serviceTourismForm.get('name')?.invalid && serviceTourismForm.get('name')?.touched">
+                  the
+                  Servie Name must not be blank</div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="service-price" formControlName="price">
+                <label for="service-price">Service Price</label>
+
+                <div class="alert alert-danger" role="alert"
+                  *ngIf="serviceTourismForm.get('price') && serviceTourismForm.get('price')?.invalid && serviceTourismForm.get('price')?.touched">
+                  Invalid price</div>
+              </div>
+              <div class="form-floating">
+                <textarea class="form-control" id="service-description" style="min-height: 100px;"
+                  formControlName="description"></textarea>
+                <label for="service-description">Description</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+
+              <div class="form-floating">
+                <select class="form-select form-select-sm" aria-label="Small select example"
+                  formControlName="available">
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+                <label for="service-description">Available</label>
+              </div>
+              <br>
+              <div class="form-floating">
+                <div class="mb-3">
+                  <input class="form-control form-control-sm" type="file" name="file" id="file"
+                    accept=".jpg, .jpeg, .png, .gif" (change)="loadImage()" formControlName="image">
+                </div>
+                <div class="view-image"
+                  style="border: 3px dashed red; border-radius: 10px; display: flex; justify-content: center;">
+                  <img id="preview"
+                    style="max-width: 190px; max-height: 190px; object-fit: contain; border-radius: 10px;"><br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addServiceTourismEntity()"
+          [disabled]="serviceTourismForm.invalid">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PACKAGE -->
+<div class="modal fade" id="modalpackageTourism" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{titleModal}} Package, to day is {{localDate}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex justify-content-center align-items-center">
+        <!--Center:d-flex justify-content-center align-items-center-->
+
+        <form [formGroup]="packageTourismForm">
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="package-name" formControlName="namePackage">
+                <label for="package-name">Package Name</label>
+
+                <div class="alert alert-danger" role="alert"
+                  *ngIf="packageTourismForm.get('namePackage') && packageTourismForm.get('namePackage')?.invalid && packageTourismForm.get('namePackage')?.touched">
+                  package Name must not blank</div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="package-price" formControlName="cost">
+                <label for="package-price">Package Price</label>
+
+                <div class="alert alert-danger" role="alert"
+                  *ngIf="packageTourismForm.get('cost') && packageTourismForm.get('cost')?.invalid && packageTourismForm.get('cost')?.touched">
+                  Invalid price</div>
+              </div>
+
+              <div class="form-floating">
+                <select class="form-select form-select-sm" aria-label="Small select example"
+                  formControlName="available">
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+                <label for="service-description">Available</label>
+              </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="small-container">
+                <div class="card text-center">
+                  <table class="table">
+                    <thead style="position: sticky; top: 0px;" class="table-dark z-3">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">code</th>
+                        <th scope="col">action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let s of listServiceOfPackage; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{s}}</td>
+                        <td class="position-relative z-0">
+                          <div class="position-absolute top-50 start-50 translate-middle">
+                            <button class="btn btn-danger nav-link rounded-circle" (click)="removeListServiceOfPackage(s)"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#ff0000" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-minus">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M5 12l14 0" />
+                              </svg></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="small-mediun-container">
+                <table class="table">
+                  <thead style="position: sticky; top: 0px;" class="table-dark z-3">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Service</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let s of serviceTourismEntityList|async;">
+                      <th scope="row">{{s.codeService}}</th>
+                      <td>{{s.nameService}}</td>
+                      <td class="position-relative z-0">
+                        <div class="position-absolute top-50 start-50 translate-middle">
+                          <button class="btn btn-success nav-link" (click)="addingListServiceOfPackage(s.codeService)"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                              height="24" viewBox="0 0 24 24" fill="none" stroke="#00b30c" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round"
+                              class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                              <path d="M12 5l0 14" />
+                              <path d="M5 12l14 0" />
+                            </svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addPackageTourismEntity()"
+          [disabled]="packageTourismForm.invalid">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--
+  <div class="row">
+                  <div class="col-4">
+                    <div id="list-example" class="list-group">
+                      <a class="list-group-item list-group-item-action" href="/customer#list-item-1">Item 1</a>
+                      <a class="list-group-item list-group-item-action" href="/customer#list-item-2">Item 2</a>
+                      <a class="list-group-item list-group-item-action" href="/customer#list-item-3">Item 3</a>
+                      <a class="list-group-item list-group-item-action" href="/customer#list-item-4">Item 4</a>
+                    </div>
+                  </div>
+                
+                  <div class="col-8 meduin-container">
+                    <div data-bs-spy="scroll" data-bs-target="#list-example" class="scrollspy-example" tabindex="0">
+                      <div id="list-item-1"></div>
+                      <div id="list-item-2"></div>
+                      <div id="list-item-3"></div>
+                      <div id="list-item-4"></div>
+                    </div>
+                  </div>
+                </div>
+-->

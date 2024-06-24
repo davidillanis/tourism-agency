@@ -1,0 +1,10 @@
+.default-container {
+    min-width: 200px;
+    max-height: 450px;
+    overflow: auto;
+}
+
+.small-container {
+    max-height: 120px;
+    overflow: auto;
+}

@@ -1,0 +1,31 @@
+.default-container {
+    min-width: 200px;
+    max-height: 450px;
+    overflow: auto;
+    z-index: 5;
+}
+.very-small-container {
+    max-height: 60px;
+    overflow: auto;
+    z-index: 5;
+}
+.small-container {
+    max-height: 120px;
+    overflow: auto;
+    z-index: 5;
+}
+.small-mediun-container {
+    max-height: 200px;
+    overflow: auto;
+    z-index: 5;
+}
+.meduin-container {
+    max-height: 310px;
+    overflow: auto;
+    z-index: 5;
+}
+.big-container {
+    max-height: 500px;
+    overflow: auto;
+    z-index: 5;
+}

@@ -1,0 +1,20 @@
+<div class="container d-flex flex-wrap z-3" style="display: block; justify-content: center;">
+  <div class="card text-center border-success" style="width: 20rem; margin: 10px; border: 2px solid; background-color: rgba(100, 200, 255, 0.2);" *ngFor="let package of packageTourismEntityList">
+    <div class="card-body">
+      <h5 class="card-title">{{package.namePackage}}</h5>
+      
+      <div class="small-container">
+        <div class="card text-center"  *ngFor="let service of package.services">
+          <button class="btn btn-info btn-sm text-primary-emphasis" (click)="viewModalServiceInfo(service)">{{service}}</button>
+        </div>
+      </div>
+
+      <p class="card-text text-success">${{package.cost}}</p>
+      
+      <div >
+        <button class="btn btn-primary btn-sm" (click)="addSalePackageTorism(package.codePackage)">shopping cart</button>
+      </div>
+    
+    </div>
+  </div>
+</div>

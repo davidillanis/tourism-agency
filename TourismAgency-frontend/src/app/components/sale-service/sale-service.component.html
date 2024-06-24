@@ -1,0 +1,12 @@
+<div class="container d-flex flex-wrap z-3" style="display: block; justify-content: center;">
+  <div class="card text-center border-info" style="width: 20rem; margin: 15px;"
+    *ngFor="let s of serviceTourismEntityList">
+    <img src={{s.urlImage}} class="card-img-top" height="200px" style="object-fit: contain;">
+    <div class="card-body">
+      <h5 class="card-title">{{s.nameService}}</h5>
+      <p class="card-text">{{s.description}}</p>
+        <button (click)="viewModalServiceInfo(s.codeService)" class="btn btn-secondary btn-sm">Details</button>&nbsp;
+        <button (click)="addSaleServiceTourism(s.codeService)" class="btn btn-primary btn-sm">shopping cart</button>
+    </div>
+  </div>
+</div>
